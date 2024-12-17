@@ -11,18 +11,20 @@ class ClientSerializer(serializers.ModelSerializer):
 
 
 class ProjectSerializer(serializers.ModelSerializer):
-    client = ClientSerializer(read_only=True)
-    executors = EmployeeSerializer(many=True, read_only=True)
-
     class Meta:
         model = Project
         fields = [
             "id",
             "name",
             "description",
-            "client",
-            "executors",
             "status",
+            "client",
             "start_date",
             "end_date",
+            "executors",
         ]
+
+    def validate_client(self, value):
+        if not value:
+            raise serializers.ValidationError("Client is required.")
+        return value

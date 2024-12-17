@@ -7,10 +7,13 @@ import Logout from './components/Logout';
 import PortfolioDetail from './components/PortfolioDetail';
 import PortfolioList from './components/PortfolioList';
 import Profile from './components/Profile';
+import ProjectAdminPanel from './components/ProjectAdminPanel';
 import ProjectDetail from './components/ProjectDetail';
+import ProjectForm from './components/ProjectForm';
 import ProjectList from './components/ProjectList';
 import ServiceDetail from './components/ServiceDetail';
 import ServiceList from './components/ServiceList';
+
 
 function App() {
     const isAuthenticated = !!localStorage.getItem('access_token');
@@ -19,6 +22,9 @@ function App() {
         <Router>
             <Routes>
                 <Route path="/" element={<Navigate to="/login" />} />
+                <Route path="/projects/admin" element={<ProjectAdminPanel />} />
+                <Route path="/projects/create" element={<ProjectForm />} />
+                <Route path="/projects/:id/edit" element={<ProjectForm />} />
                 <Route
                     path="/projects"
                     element={isAuthenticated ? <ProjectList /> : <Navigate to="/login" />}
