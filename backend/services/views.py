@@ -1,3 +1,19 @@
-from django.shortcuts import render
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 
-# Create your views here.
+from .models import Service
+from .serializers import ServiceSerializer
+
+
+class ServiceListView(ListAPIView):
+    queryset = Service.objects.select_related("category").all()
+    serializer_class = ServiceSerializer
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    filterset_fields = ["category"]
+    search_fields = ["name", "description"]
+
+
+class ServiceDetailView(RetrieveAPIView):
+    queryset = Service.objects.select_related("category").all()
+    serializer_class = ServiceSerializer
