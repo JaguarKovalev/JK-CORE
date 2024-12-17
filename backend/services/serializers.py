@@ -15,3 +15,19 @@ class ServiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Service
         fields = ["id", "name", "description", "image", "category"]
+
+
+class ServiceDetailSerializer(serializers.ModelSerializer):
+    category = CategorySerializer(read_only=True)
+
+    class Meta:
+        model = Service
+        fields = [
+            "id",
+            "name",
+            "description",
+            "detailed_description",
+            "image",
+            "video_url",
+            "category",
+        ]

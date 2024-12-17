@@ -23,9 +23,13 @@ class Service(models.Model):
     )
     name = models.CharField(max_length=255, verbose_name="Название услуги")
     description = models.TextField(verbose_name="Описание услуги")
+    detailed_description = models.TextField(
+        blank=True, null=True, verbose_name="Детальное описание"
+    )
     image = models.ImageField(
         upload_to="services/", null=True, blank=True, verbose_name="Изображение услуги"
     )
+    video_url = models.URLField(blank=True, null=True, verbose_name="Ссылка на видео")
 
     def __str__(self):
         return self.name

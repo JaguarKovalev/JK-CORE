@@ -3,7 +3,7 @@ from rest_framework.filters import SearchFilter
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 
 from .models import Category, Service
-from .serializers import CategorySerializer, ServiceSerializer
+from .serializers import CategorySerializer, ServiceDetailSerializer, ServiceSerializer
 
 
 class ServiceListView(ListAPIView):
@@ -22,3 +22,8 @@ class ServiceDetailView(RetrieveAPIView):
 class CategoryListView(ListAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+
+
+class ServiceDetailView(RetrieveAPIView):
+    queryset = Service.objects.select_related("category").all()
+    serializer_class = ServiceDetailSerializer
