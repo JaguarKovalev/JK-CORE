@@ -1,10 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Login from './components/Login';
-import Profile from './components/Profile';
-import Logout from './components/Logout';
+import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import ChangePassword from './components/ChangePassword';
 import EmployeeList from './components/EmployeeList';
+import Login from './components/Login';
+import Logout from './components/Logout';
+import Profile from './components/Profile';
+import ServiceList from './components/ServiceList';
 
 function App() {
     const isAuthenticated = !!localStorage.getItem('access_token');
@@ -12,6 +13,8 @@ function App() {
     return (
         <Router>
             <Routes>
+                <Route path="/" element={<Navigate to="/login" />} />
+                <Route path="/services" element={<ServiceList />} />
                 <Route path="/login" element={<Login />} />
                 <Route
                     path="/profile"

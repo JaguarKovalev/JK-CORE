@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import axios from 'axios';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const ChangePassword = () => {
@@ -12,7 +12,7 @@ const ChangePassword = () => {
         try {
             const token = localStorage.getItem('access_token');
             await axios.post(
-                'http://127.0.0.1:8000/api/employees/change-password/',
+                `${process.env.REACT_APP_API_URL}/api/employees/change-password/`,
                 { old_password: oldPassword, new_password: newPassword },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
