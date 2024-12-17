@@ -12,6 +12,8 @@ urlpatterns = [
     path("services/", include("services.urls")),
     # Маршруты проектов
     path("projects/", include("project_manager.urls")),
+    # Маршруты портфолио
+    path("portfolio/", include("portfolio.urls")),
     # JWT токены
     path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
