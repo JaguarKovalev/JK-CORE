@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
 
 const ServiceList = () => {
     const [services, setServices] = useState([]);
@@ -9,23 +11,24 @@ const ServiceList = () => {
 
     // Загрузка списка услуг и категорий
     useEffect(() => {
+        const fetchServices = async () => {
+            try {
+                const queryParams = [];
+                if (selectedCategory) queryParams.push(`category=${selectedCategory}`);
+                if (search) queryParams.push(`search=${search}`);
+    
+                const queryString = queryParams.length > 0 ? `?${queryParams.join('&')}` : '';
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/services/${queryString}`);
+                setServices(response.data);
+            } catch (error) {
+                console.error('Error fetching services:', error);
+            }
+        };
         fetchServices();
         fetchCategories();
     }, [selectedCategory, search]);
 
-    const fetchServices = async () => {
-        try {
-            const queryParams = [];
-            if (selectedCategory) queryParams.push(`category=${selectedCategory}`);
-            if (search) queryParams.push(`search=${search}`);
 
-            const queryString = queryParams.length > 0 ? `?${queryParams.join('&')}` : '';
-            const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/services/${queryString}`);
-            setServices(response.data);
-        } catch (error) {
-            console.error('Error fetching services:', error);
-        }
-    };
 
     const fetchCategories = async () => {
         try {
@@ -61,15 +64,25 @@ const ServiceList = () => {
 
             {/* Список услуг */}
             <ul>
-                {services.map((service) => (
-                    <li key={service.id}>
-                        <h3>{service.name}</h3>
-                        <p>{service.description}</p>
-                        {service.image && <img src={service.image} alt={service.name} width="200" />}
-                        <p><strong>Category:</strong> {service.category.name}</p>
-                    </li>
-                ))}
-            </ul>
+    {services.map((service) => (
+        <li key={service.id}>
+            <h3>{service.name}</h3>
+            <p>{service.description}</p>
+            {service.image && (
+                <img
+                    src={`${service.image}`}
+                    alt={service.name}
+                    width="200"
+                />
+            )}
+            <p>
+                <strong>Category:</strong> {service.category.name}
+            </p>
+            <Link to={`/services/${service.id}`}>View Details</Link>
+        </li>
+    ))}
+</ul>
+
         </div>
     );
 };
