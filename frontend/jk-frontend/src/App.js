@@ -5,6 +5,7 @@ import EmployeeList from './components/EmployeeList';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import Profile from './components/Profile';
+import ProjectDetail from './components/ProjectDetail';
 import ProjectList from './components/ProjectList';
 import ServiceDetail from './components/ServiceDetail';
 import ServiceList from './components/ServiceList';
@@ -19,6 +20,10 @@ function App() {
                 <Route
                     path="/projects"
                     element={isAuthenticated ? <ProjectList /> : <Navigate to="/login" />}
+                />
+                <Route
+                    path="/projects/:id"
+                    element={isAuthenticated ? <ProjectDetail /> : <Navigate to="/login" />}
                 />
                 <Route path="/services" element={<ServiceList />} />
                 <Route path="/services/:id" element={<ServiceDetail />} />
