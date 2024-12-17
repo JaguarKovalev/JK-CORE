@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     # My Apps
     "employees",
     "services",
+    "project_manager",
 ]
 
 MIDDLEWARE = [
