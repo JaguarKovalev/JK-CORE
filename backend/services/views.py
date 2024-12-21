@@ -17,6 +17,7 @@ class ServiceListPagination(PageNumberPagination):
     max_page_size = 100  # Максимальный размер страницы
 
 
+@method_decorator(cache_page(60), name="dispatch")
 class ServiceListView(ListAPIView):
     queryset = Service.objects.select_related("category").all()
     serializer_class = ServiceSerializer
@@ -26,11 +27,13 @@ class ServiceListView(ListAPIView):
     pagination_class = ServiceListPagination
 
 
+@method_decorator(cache_page(60), name="dispatch")
 class ServiceDetailView(RetrieveAPIView):
     queryset = Service.objects.select_related("category").all()
     serializer_class = ServiceSerializer
 
 
+@method_decorator(cache_page(60), name="dispatch")
 class CategoryListView(APIView):
     def get(self, request):
         categories = Category.objects.all()
@@ -38,6 +41,7 @@ class CategoryListView(APIView):
         return Response(serializer.data)
 
 
+@method_decorator(cache_page(60), name="dispatch")
 class ServiceDetailView(RetrieveAPIView):
     queryset = Service.objects.select_related("category").all()
     serializer_class = ServiceDetailSerializer
