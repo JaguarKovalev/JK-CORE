@@ -16,6 +16,7 @@ djangorestframework-simplejwt = {extras = ["redis"], version = "^5.3.1"}
 pillow = "^11.0.0"
 django-filter = "^24.3"
 python-decouple = "^3.8"
+drf-yasg = "^1.21.8"
 
 
 [build-system]

@@ -1,3 +1,4 @@
+from django.db.models import Count
 from rest_framework.generics import (
     CreateAPIView,
     DestroyAPIView,
@@ -9,8 +10,30 @@ from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Client, Project
+from .models import Client, Employee, Project
 from .serializers import ClientSerializer, ProjectSerializer
+
+
+class ProjectStatisticsView(APIView):
+    permission_classes = [IsAdminUser]
+
+    def get(self, request):
+        # Статистика по статусам проектов
+        projects_by_status = Project.objects.values("status").annotate(
+            total=Count("id")
+        )
+
+        # Нагрузка сотрудников
+        employee_load = Employee.objects.annotate(
+            project_count=Count("project")
+        ).values("id", "username", "project_count")
+
+        data = {
+            "projects_by_status": projects_by_status,
+            "employee_load": list(employee_load),
+        }
+
+        return Response(data)
 
 
 class ClientListView(APIView):
