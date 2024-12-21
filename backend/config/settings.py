@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "drf_spectacular",
     "corsheaders",
     # My Apps
     "employees",
@@ -119,7 +120,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = "static/"
+
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"  # Папка для сборки статических файлов
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -134,6 +138,7 @@ REST_FRAMEWORK = {
     ),
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 10,  # Количество элементов на странице
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 SIMPLE_JWT = {
@@ -146,3 +151,10 @@ INSTALLED_APPS += ["rest_framework_simplejwt.token_blacklist"]
 # Путь для медиафайлов (загружаемых изображений и других файлов)
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "API Documentation",
+    "DESCRIPTION": "Документация для API проекта JK-Core",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,  # Отключить отображение схемы в корне
+}
