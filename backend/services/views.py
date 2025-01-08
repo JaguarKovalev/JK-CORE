@@ -12,7 +12,9 @@ from .serializers import CategorySerializer, ServiceDetailSerializer, ServiceSer
 
 
 class ServiceListPagination(PageNumberPagination):
-    page_size = 10  # Количество элементов на странице
+
+    # Количество элементов на странице
+    page_size = 100
     page_size_query_param = (
         "page_size"  # Позволяет изменять размер страницы через параметр
     )
@@ -41,9 +43,3 @@ class CategoryListView(APIView):
         categories = Category.objects.all()
         serializer = CategorySerializer(categories, many=True)
         return Response(serializer.data)
-
-
-@method_decorator(cache_page(60), name="dispatch")
-class ServiceDetailView(RetrieveAPIView):
-    queryset = Service.objects.select_related("category").all()
-    serializer_class = ServiceDetailSerializer
