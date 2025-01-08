@@ -143,3 +143,18 @@ CACHES = {
         "KEY_PREFIX": "jk_project",
     }
 }
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://cloud.jkproduction.pro",  # Ваш домен с HTTPS
+    "http://cloud.jkproduction.pro",
+    "http://127.0.0.1:8000",
+    "http://localhost:8000",
+    "http://127.0.0.1:3000",
+    "http://localhost:3000",
+    "https://core.jkproduction.pro",
+    "http://core.jkproduction.pro",
+    "http://core.jkproduction.pro:3000",
+    "http://core.jkproduction.pro:8000",
+    "https://core.jkproduction.pro:3000",
+    "https://core.jkproduction.pro:8000",
+]
