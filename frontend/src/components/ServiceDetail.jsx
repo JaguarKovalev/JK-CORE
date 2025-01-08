@@ -55,7 +55,7 @@ const ServiceDetail = () => {
                 )}
                 <p><strong>Категория:</strong> {service.category.name}</p>
             </div>
-            <button className="back-button" onClick={() => navigate('/services')}>Назад к сервисам</button>
+            <button className="back-button" onClick={() => navigate('/services')}>Назад к услугам</button>
         </div>
     );
 };

@@ -23,15 +23,15 @@ const PortfolioDetail = () => {
         fetchWorkDetail();
     }, [id, navigate]);
 
-    if (!work) return <p>Loading...</p>;
+    if (!work) return <p>Загрузка информации...</p>;
 
     return (
         <div className="portfolio-detail-container">
             <h1 className="portfolio-title">{work.name}</h1>
             <div className="portfolio-content">
-                <p><strong>Type:</strong> {work.type}</p>
-                <p><strong>Description:</strong> {work.description}</p>
-                {work.client && <p><strong>Client:</strong> {work.client.name}</p>}
+                <p><strong>Тип:</strong> {work.type}</p>
+                <p><strong>Описание:</strong> {work.description}</p>
+                {work.client && <p><strong>Клиент:</strong> {work.client.name}</p>}
                 
                 {work.image && (
                     <div className="portfolio-image">
@@ -49,7 +49,7 @@ const PortfolioDetail = () => {
                         ></iframe>
                     </div>
                 )}
-                <button className="portfolio-button" onClick={() => navigate('/portfolio')}>Back to Portfolio</button>
+                <button className="portfolio-button" onClick={() => navigate('/portfolio')}>Назад к портфолио</button>
             </div>
         </div>
     );

@@ -30,7 +30,7 @@ const ProjectDetail = () => {
     }, [id, navigate]);
 
     if (!project) {
-        return <p>Loading project details...</p>;
+        return <p>Загрузка информации...</p>;
     }
 
     return (
