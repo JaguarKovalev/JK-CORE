@@ -19,11 +19,16 @@ class PortfolioListView(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request):
-        works = (
-            Portfolio.objects.select_related("category", "client")
-            .prefetch_related("executors")
-            .all()
+        category_id = request.GET.get(
+            "category"
+        )  # Получаем параметр категории из запроса
+
+        # Фильтруем работы по категории, если параметр передан
+        works = Portfolio.objects.select_related("category", "client").prefetch_related(
+            "executors"
         )
+        if category_id:
+            works = works.filter(category_id=category_id)
 
         # Получаем параметры пагинации
         page = request.GET.get("page", 1)

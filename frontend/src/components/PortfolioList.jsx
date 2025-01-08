@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-// import '../styles/PortfolioList.css'; // Подключаем стили
 
 const PortfolioList = () => {
     const [works, setWorks] = useState([]);
@@ -11,19 +10,11 @@ const PortfolioList = () => {
     const [totalPages, setTotalPages] = useState(1);
     const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        fetchWorks(currentPage);
-        fetchCategories();
-    }, [currentPage, selectedCategory]);
-
-    const fetchWorks = async (page = 1) => {
+    const fetchWorks = async (page = 1, category = '') => {
         setIsLoading(true);
         try {
-            const queryParam = selectedCategory ? `&category=${selectedCategory}` : '';
-            const response = await axios.get(
-                `/api/portfolio/?page=${page}${queryParam}`
-            );
-
+            const queryParam = category ? `&category=${category}` : '';
+            const response = await axios.get(`/api/portfolio/?page=${page}${queryParam}`);
             setWorks(response.data.results || []);
             setTotalPages(response.data.total_pages);
         } catch (error) {
@@ -42,6 +33,14 @@ const PortfolioList = () => {
         }
     };
 
+    useEffect(() => {
+        fetchWorks(currentPage, selectedCategory);
+    }, [currentPage, selectedCategory]);
+
+    useEffect(() => {
+        fetchCategories();
+    }, []);
+
     return (
         <div className="portfolio-list-container">
             <h1>Портфолио</h1>
@@ -49,11 +48,8 @@ const PortfolioList = () => {
                 <label htmlFor="category-select">Категория:</label>
                 <select
                     id="category-select"
-                    value={selectedCategory}
-                    onChange={(e) => {
-                        setSelectedCategory(e.target.value);
-                        setCurrentPage(1);
-                    }}
+                    value={selectedCategory || ''}
+                    onChange={(e) => setSelectedCategory(e.target.value)}
                 >
                     <option value="">Все</option>
                     {categories.map((category) => (
