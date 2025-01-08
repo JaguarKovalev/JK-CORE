@@ -1,0 +1,57 @@
+
+
+.menu-container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #1e1e1e;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    height: 60px; /* Высота шапки */
+    display: flex;
+    align-items: center;
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0; /* Убираем внутренние отступы */
+}
+
+.menu-link {
+    margin: 0 15px;
+    color: #bdbdbd;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 5px 10px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.menu-link:hover {
+    color: #fff;
+    background-color: #333;
+    border-radius: 5px;
+}
+
+.active {
+    color: #fff;
+    border-bottom: 2px solid #fff;
+}
+
+/* Отступ для контента */
+.content {
+    padding-top: 70px; /* Отступ равен высоте меню + немного запаса */
+}
+
+/* Для адаптивности */
+@media (max-width: 768px) {
+    .menu {
+        flex-direction: column;
+        align-items: center;
+    }
+    .menu-link {
+        margin: 10px 0;
+    }
+}

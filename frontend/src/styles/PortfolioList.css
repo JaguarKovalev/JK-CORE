@@ -1,0 +1,95 @@
+.portfolio-list-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+h1 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.filter {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.filter select {
+    padding: 10px;
+    border: 1px solid #fff;
+    background-color: #1e1e1e;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.portfolio-card {
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    overflow: hidden;
+    text-decoration: none;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.portfolio-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+.portfolio-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.portfolio-card-content {
+    padding: 15px;
+}
+
+.portfolio-card-content h2 {
+    margin: 10px 0;
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+.portfolio-card-content p {
+    font-size: 1rem;
+    color: #bdbdbd;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    padding: 10px 20px;
+    background-color: #1e1e1e;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.pagination button:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.pagination span {
+    font-size: 1rem;
+    color: #fff;
+}
