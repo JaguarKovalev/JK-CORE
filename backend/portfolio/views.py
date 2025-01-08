@@ -28,11 +28,13 @@ class PortfolioListView(APIView):
             "executors"
         )
         if category_id:
-            works = works.filter(category_id=category_id)
+            works = works.filter(category_id=category_id).order_by("name")
+        else:
+            works = works.order_by("name")
 
         # Получаем параметры пагинации
         page = request.GET.get("page", 1)
-        page_size = 6  # Количество элементов на странице
+        page_size = 8  # Количество элементов на странице
 
         # Пагинация
         paginator = Paginator(works, page_size)
